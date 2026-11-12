@@ -98,3 +98,22 @@ export const updateUserStatus = (id: number, status: number) => {
   }
   return request.put({ url: '/system/user/update-status', data: data })
 }
+// 异步导入任务信息
+export interface UserImportTaskVO {
+  id: number
+  status: number
+  totalCount: number
+  processedCount: number
+  successCount: number
+  failCount: number
+  errorMessage: string | null
+  startTime: number | null
+  finishTime: number | null
+}
+
+// 查询异步导入任务进度
+export const getUserImportTask = (taskId: number): Promise<UserImportTaskVO> => {
+  return request.get({
+    url: `/system/user/import-task/${taskId}`
+  })
+}
